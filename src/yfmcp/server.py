@@ -199,4 +199,4 @@ def get_price_history(
 
 
 def main() -> None:
-    mcp.run()
+    mcp.run(transport="streamable-http")
