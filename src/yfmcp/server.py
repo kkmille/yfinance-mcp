@@ -4,7 +4,7 @@ from typing import Annotated
 
 import yfinance as yf
 from loguru import logger
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 from pydantic import Field
 from yfinance.const import SECTOR_INDUSTY_MAPPING
 
@@ -16,7 +16,6 @@ from yfmcp.types import TopType
 
 # https://github.com/jlowin/fastmcp/issues/81#issuecomment-2714245145
 mcp = FastMCP("Yahoo Finance MCP Server", log_level="ERROR")
-
 
 @mcp.tool()
 def get_ticker_info(symbol: Annotated[str, Field(description="The stock symbol")]) -> str:
@@ -198,5 +197,5 @@ def get_price_history(
     return df.to_markdown()
 
 
-def main() -> None:
+if __name__ == "__main__":
     mcp.run(transport="streamable-http")
